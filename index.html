@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="sunrise">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>超超的生活仪表盘</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+/* ====== 8 Themes ====== */
+:root, [data-theme="dark"]{--bg:#0d1117;--bg2:#161b22;--card:#1a1f2b;--border:#2a3040;--text:#e1e4ed;--muted:#6b7280;--accent:#6366f1;--accent2:#818cf8;--green:#22c55e;--yellow:#eab308;--red:#ef4444;--purple:#a855f7;--cyan:#06b6d4;--shadow:0 2px 12px rgba(0,0,0,.3);--radius:12px}
+[data-theme="warm"]{--bg:#fef9ef;--bg2:#faf3e6;--card:#fffdf7;--border:#e8dfcc;--text:#3d3226;--muted:#8b7e6a;--accent:#d4784c;--accent2:#e8917a;--green:#7a9e7e;--yellow:#d4a843;--red:#c46b5a;--purple:#a089b8;--cyan:#6b9e9e;--shadow:0 2px 12px rgba(60,40,20,.08);--radius:10px}
+[data-theme="candy"]{--bg:#fdf2f8;--bg2:#fce7f3;--card:#fff;--border:#f9d5e5;--text:#4a1942;--muted:#9d6b8f;--accent:#ec4899;--accent2:#f472b6;--green:#34d399;--yellow:#fbbf24;--red:#fb7185;--purple:#c084fc;--cyan:#22d3ee;--shadow:0 2px 16px rgba(236,72,153,.1);--radius:16px}
+[data-theme="sunset"]{--bg:#1a1410;--bg2:#241c16;--card:#2a1f18;--border:#3d2d20;--text:#ede0d4;--muted:#9b8570;--accent:#f97316;--accent2:#fb923c;--green:#84cc16;--yellow:#fbbf24;--red:#f87171;--purple:#e879f9;--cyan:#f59e0b;--shadow:0 2px 16px rgba(249,115,22,.15);--radius:10px}
+[data-theme="sunrise"]{--bg:#fff8f0;--bg2:#fff3e4;--card:#fff;--border:#fde4c8;--text:#4a3520;--muted:#a08460;--accent:#f59e0b;--accent2:#fbbf24;--green:#84cc16;--yellow:#fbbf24;--red:#f87171;--purple:#c084fc;--cyan:#22d3ee;--shadow:0 2px 14px rgba(245,158,11,.1);--radius:14px}
+[data-theme="forest"]{--bg:#f4f7f0;--bg2:#edf2e8;--card:#fff;--border:#d4e0c8;--text:#2d3a24;--muted:#6b7a5e;--accent:#4d7c3b;--accent2:#6ba34a;--green:#4d7c3b;--yellow:#c4a535;--red:#b85450;--purple:#7c6ba3;--cyan:#3b7c6e;--shadow:0 2px 12px rgba(77,124,59,.08);--radius:12px}
+[data-theme="ocean"]{--bg:#f0f7fb;--bg2:#e6f1f8;--card:#fff;--border:#cce0f0;--text:#1a3a4a;--muted:#5a7a8a;--accent:#0ea5e9;--accent2:#38bdf8;--green:#10b981;--yellow:#f59e0b;--red:#ef4444;--purple:#8b5cf6;--cyan:#06b6d4;--shadow:0 2px 14px rgba(14,165,233,.1);--radius:14px}
+[data-theme="lavender"]{--bg:#f8f6fc;--bg2:#f0edf8;--card:#fff;--border:#e0d8f0;--text:#2d2048;--muted:#7a6e94;--accent:#8b5cf6;--accent2:#a78bfa;--green:#6ee7b7;--yellow:#fbbf24;--red:#f87171;--purple:#a78bfa;--cyan:#67e8f9;--shadow:0 2px 16px rgba(139,92,246,.1);--radius:16px}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,'Inter','Noto Sans SC',sans-serif;line-height:1.6;transition:background .4s,color .4s}
+.container{max-width:1200px;margin:0 auto;padding:20px 24px}
+
+/* Nav Tabs */
+.nav-bar{display:flex;gap:4px;padding:8px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:24px;overflow-x:auto;box-shadow:var(--shadow)}
+.nav-tab{padding:10px 18px;border-radius:8px;border:none;background:none;color:var(--muted);font-size:14px;cursor:pointer;font-family:inherit;white-space:nowrap;transition:all .2s}
+.nav-tab:hover{color:var(--text);background:var(--bg2)}
+.nav-tab.active{background:var(--accent);color:#fff;font-weight:600}
+.nav-tab .badge{display:inline-block;background:rgba(255,255,255,.25);padding:1px 6px;border-radius:8px;font-size:10px;margin-left:4px}
+
+/* Header */
+header{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;padding:12px 0 20px;margin-bottom:8px}
+.logo h1{font-size:24px;font-weight:700}
+.logo span{font-size:13px;color:var(--muted);display:block}
+.header-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.theme-switcher{display:flex;gap:4px;background:var(--card);border:1px solid var(--border);border-radius:24px;padding:3px}
+.theme-btn{width:30px;height:30px;border-radius:50%;border:none;cursor:pointer;transition:transform .2s,box-shadow .2s;font-size:13px;display:flex;align-items:center;justify-content:center}
+.theme-btn.dark{background:#1a1f2b;color:#818cf8}.theme-btn.warm{background:#fef9ef;color:#d4784c}.theme-btn.candy{background:#fce7f3;color:#ec4899}
+.theme-btn.sunset{background:#2a1f18;color:#f97316}.theme-btn.sunrise{background:#fff3e4;color:#f59e0b}.theme-btn.forest{background:#edf2e8;color:#4d7c3b}
+.theme-btn.ocean{background:#e6f1f8;color:#0ea5e9}.theme-btn.lavender{background:#f0edf8;color:#8b5cf6}
+.theme-btn.active{transform:scale(1.18);box-shadow:0 0 0 3px var(--accent)}.theme-btn:hover{transform:scale(1.1)}
+
+/* Page sections */
+.page{display:none}.page.active{display:block}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:24px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);transition:transform .2s,border-color .2s}
+.kpi:hover{transform:translateY(-2px);border-color:var(--accent2)}
+.kpi .label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.kpi .value{font-size:32px;font-weight:700;margin:4px 0}
+.kpi .delta{font-size:12px}
+.c-green{color:var(--green)}.c-yellow{color:var(--yellow)}.c-purple{color:var(--purple)}.c-cyan{color:var(--cyan)}.c-red{color:var(--red)}
+.bar-track{height:6px;background:var(--border);border-radius:3px;margin-top:10px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width .8s ease}
+.bar-fill.yellow{background:var(--yellow)}.bar-fill.green{background:var(--green)}.bar-fill.red{background:var(--red)}
+
+/* Charts */
+.chart-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:16px;margin-bottom:24px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.chart-card h3{font-size:13px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.chart-wrap{position:relative;height:250px}.chart-wrap canvas{width:100%!important}
+
+/* Timeline */
+.timeline{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;margin-bottom:24px;box-shadow:var(--shadow)}
+.timeline h2,.section-title{font-size:16px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.day-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--border);transition:background .15s}
+.day-row:hover{background:var(--bg2);margin:0 -12px;padding-left:12px;padding-right:12px;border-radius:8px}
+.day-row.hidden{display:none}
+.day-date{min-width:56px;font-size:12px;color:var(--muted);text-align:right;padding-top:3px}
+.day-mood{font-size:22px;min-width:30px;text-align:center}
+.day-content{flex:1}.day-content p{font-size:14px;line-height:1.6;margin-bottom:4px}
+.day-meta{font-size:12px;color:var(--muted)}
+.tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;margin:2px 4px 0 0}
+.tag.mood{background:rgba(168,85,247,.12);color:var(--purple)}.tag.book{background:rgba(99,102,241,.12);color:var(--accent)}
+.tag.event{background:rgba(234,179,8,.12);color:var(--yellow)}.tag.sport{background:rgba(34,197,94,.12);color:var(--green)}
+
+/* Search */
+.search-box{width:100%;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:inherit;margin-bottom:20px;transition:border-color .2s}
+.search-box:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,.1)}
+.search-stats{font-size:12px;color:var(--muted);margin-bottom:12px}
+
+/* Goal cards */
+.goal-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:24px}
+.goal-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.goal-card h3{font-size:15px;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.goal-card .goal-target{font-size:12px;color:var(--muted);margin-bottom:12px}
+.goal-bar{height:12px;background:var(--border);border-radius:6px;overflow:hidden;margin-bottom:6px}
+.goal-fill{height:100%;border-radius:6px;transition:width 1s ease}
+.goal-fill.purple{background:linear-gradient(90deg,var(--accent),var(--purple))}
+.goal-fill.green{background:linear-gradient(90deg,var(--accent),var(--green))}
+.goal-fill.yellow{background:linear-gradient(90deg,var(--accent),var(--yellow))}
+.goal-stats{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+
+/* Mood calendar */
+.mood-cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px}
+.mood-cell{aspect-ratio:1;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:16px;transition:transform .2s;cursor:pointer}
+.mood-cell:hover{transform:scale(1.2)}
+.mood-cell.great{background:rgba(132,204,22,.25)}.mood-cell.good{background:rgba(132,204,22,.15)}
+.mood-cell.ok{background:rgba(251,191,36,.15)}.mood-cell.meh{background:rgba(248,113,113,.12)}
+.mood-cell.empty{background:var(--border);opacity:.3}
+.mood-label{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;text-align:center;font-size:10px;color:var(--muted);margin-bottom:4px}
+
+/* Knowledge */
+.bottom-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(350px,1fr));gap:16px;margin-bottom:24px}
+.knowledge-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.knowledge-card h2{font-size:16px;margin-bottom:14px}
+.concept-item,.entity-item{padding:10px 12px;border-radius:8px;margin-bottom:6px;transition:background .15s;cursor:pointer;border:1px solid transparent}
+.concept-item:hover,.entity-item:hover{background:var(--bg2);border-color:var(--border)}
+.concept-item .name{font-size:14px;font-weight:600}.concept-item .desc{font-size:12px;color:var(--muted)}
+.concept-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;margin-right:4px;background:rgba(99,102,241,.15);color:var(--accent)}
+.book-item{display:flex;gap:12px;padding:12px;border-radius:8px;margin-bottom:8px;transition:background .15s;border:1px solid transparent}
+.book-item:hover{background:var(--bg2);border-color:var(--border)}
+.book-cover{width:40px;height:56px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.book-cover.reading{background:linear-gradient(135deg,var(--accent),var(--purple))}
+.book-info{flex:1}.book-info .title{font-size:14px;font-weight:600}.book-info .author{font-size:12px;color:var(--muted)}.book-info .progress{font-size:11px;color:var(--green)}
+
+footer{text-align:center;color:var(--muted);font-size:12px;padding:32px 0 24px;border-top:1px solid var(--border);margin-top:24px}
+footer a{color:var(--accent2);text-decoration:none}
+.empty-state{text-align:center;padding:32px;color:var(--muted);font-size:14px}
+
+@media (max-width:700px){.chart-grid{grid-template-columns:1fr}.kpi-grid{grid-template-columns:1fr 1fr}.bottom-grid{grid-template-columns:1fr}.goal-grid{grid-template-columns:1fr}header{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- HEADER -->
+<header>
+  <div class="logo"><h1>🌱 超超的生活仪表盘</h1><span>记录每一天 · 看见成长的轨迹</span></div>
+  <div class="header-right">
+    <div class="theme-switcher" id="themeSwitcher">
+      <btn class="theme-btn candy" data-theme="candy" title="糖果粉">🍬</btn>
+      <btn class="theme-btn forest" data-theme="forest" title="森林绿">🌿</btn>
+      <btn class="theme-btn ocean" data-theme="ocean" title="海洋蓝">🌊</btn>
+      <btn class="theme-btn lavender" data-theme="lavender" title="薰衣草">💜</btn>
+      <btn class="theme-btn sunrise active" data-theme="sunrise" title="朝阳橙">🌄</btn>
+      <btn class="theme-btn dark" data-theme="dark" title="暗色月亮">🌙</btn>
+      <btn class="theme-btn warm" data-theme="warm" title="温暖太阳">☀️</btn>
+      <btn class="theme-btn sunset" data-theme="sunset" title="日落橙">🌅</btn>
+    </div>
+  </div>
+</header>
+
+<!-- NAV TABS -->
+<nav class="nav-bar" id="navBar">
+  <button class="nav-tab active" data-page="dashboard">📊 仪表盘</button>
+  <button class="nav-tab" data-page="monthly">📆 月报</button>
+  <button class="nav-tab" data-page="goals">🎯 目标<span class="badge">3</span></button>
+  <button class="nav-tab" data-page="knowledge">🧠 知识库<span class="badge">7</span></button>
+  <button class="nav-tab" data-page="search">🔍 搜索</button>
+</nav>
+
+<!-- ========== PAGE: DASHBOARD ========== -->
+<div class="page active" id="page-dashboard">
+
+<div class="kpi-grid">
+  <div class="kpi"><div class="label">💰 本周花费</div><div class="value c-yellow">¥134</div><div class="delta">预算 ¥1,200/周 · 剩余 ¥1,066</div><div class="bar-track"><div class="bar-fill yellow" style="width:11%"></div></div></div>
+  <div class="kpi"><div class="label">🏃 本周运动</div><div class="value c-green">0<span style="font-size:16px;color:var(--muted)">/7天</span></div><div class="delta">做了家务 · 无正式运动</div></div>
+  <div class="kpi"><div class="label">😊 今日情绪</div><div class="value c-purple">5.5<span style="font-size:16px;color:var(--muted)">/10</span></div><div class="delta">大姨妈+孤单 · 波动大</div></div>
+  <div class="kpi"><div class="label">📚 本周阅读</div><div class="value c-cyan">0<span style="font-size:16px;color:var(--muted)">天</span></div><div class="delta">下周继续《原子习惯》</div></div>
+</div>
+
+<div class="chart-grid">
+  <div class="chart-card"><h3>📈 花费趋势</h3><div class="chart-wrap"><canvas id="spendChart"></canvas></div></div>
+  <div class="chart-card"><h3>🎭 情绪波动</h3><div class="chart-wrap"><canvas id="moodChart"></canvas></div></div>
+  <div class="chart-card"><h3>🍩 花费分类</h3><div class="chart-wrap"><canvas id="categoryChart" style="max-height:230px"></canvas></div></div>
+  <div class="chart-card"><h3>🔥 运动分布</h3><div class="chart-wrap"><canvas id="exerciseChart"></canvas></div></div>
+</div>
+
+<div class="timeline" id="timelineDash">
+  <h2>📅 本周记录（7/25 - 7/31）</h2>
+  <div class="day-row"><div class="day-date">7/25 周六</div><div class="day-mood">😞</div><div class="day-content"><p>弟弟因台风提前回深圳，感到孤单想哭。大姨妈第一天身体不适。花了 ¥134 买枕头和日用品。</p><div class="day-meta">💸 ¥134.47 <span class="tag event">家庭</span><span class="tag mood">孤单</span><span class="tag sport">家务</span></div></div></div>
+  <div class="day-row" style="opacity:0.4"><div class="day-date">7/26 周日</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta">明天来填 💜</div></div></div>
+  <div class="day-row" style="opacity:0.4"><div class="day-date">7/27 周一</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta">记得找Hermes打卡哦</div></div></div>
+  <div class="day-row" style="opacity:0.4"><div class="day-date">7/28 周二</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta"></div></div></div>
+  <div class="day-row" style="opacity:0.4"><div class="day-date">7/29 周三</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta"></div></div></div>
+  <div class="day-row" style="opacity:0.4"><div class="day-date">7/30 周四</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta"></div></div></div>
+  <div class="day-row" style="opacity:0.4"><div class="day-date">7/31 周五</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta">周六复盘见！</div></div></div>
+</div>
+
+</div><!-- /dashboard -->
+
+<!-- ========== PAGE: MONTHLY REPORT ========== -->
+<div class="page" id="page-monthly">
+
+<div class="kpi-grid">
+  <div class="kpi"><div class="label">💰 7月总花费</div><div class="value c-yellow">¥5,280</div><div class="delta">贷款 ¥10,000 + 生活 ¥5,280</div><div class="bar-track"><div class="bar-fill yellow" style="width:62%"></div></div></div>
+  <div class="kpi"><div class="label">🏃 本月运动</div><div class="value c-green">16<span style="font-size:16px;color:var(--muted)">次</span></div><div class="delta">跑步7 · 游泳4 · 瑜伽5</div></div>
+  <div class="kpi"><div class="label">📚 本月阅读</div><div class="value c-cyan">18<span style="font-size:16px;color:var(--muted)">天</span></div><div class="delta">1本书在读 · 日均38分钟</div></div>
+  <div class="kpi"><div class="label">📝 本月记录</div><div class="value c-purple">25<span style="font-size:16px;color:var(--muted)">条</span></div><div class="delta">日均0.8条 · 保持记录习惯</div></div>
+</div>
+
+<div class="chart-grid">
+  <div class="chart-card"><h3>📊 月度花费趋势（7月）</h3><div class="chart-wrap"><canvas id="monthSpendChart"></canvas></div></div>
+  <div class="chart-card"><h3>😊 7月情绪日历</h3>
+    <div class="mood-label"><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span><span>日</span></div>
+    <div class="mood-cal" id="moodCal"></div>
+    <div style="margin-top:12px;font-size:12px;color:var(--muted);display:flex;gap:16px">
+      <span>🟢 很棒</span><span>🟡 还行</span><span>🔴 低落</span><span>⚪ 无记录</span>
+    </div>
+  </div>
+  <div class="chart-card"><h3>📖 本月阅读分布</h3><div class="chart-wrap"><canvas id="readChart"></canvas></div></div>
+  <div class="chart-card"><h3>🏷️ 本月标签云</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;padding:20px 0">
+      <span class="tag sport" style="font-size:16px;padding:6px 14px">跑步 7次</span>
+      <span class="tag sport" style="font-size:14px;padding:5px 12px">游泳 4次</span>
+      <span class="tag sport" style="font-size:13px;padding:5px 12px">瑜伽 5次</span>
+      <span class="tag book" style="font-size:15px;padding:6px 14px">阅读 18天</span>
+      <span class="tag mood" style="font-size:14px;padding:5px 12px">开心 12天</span>
+      <span class="tag mood" style="font-size:12px;padding:4px 10px">平淡 4天</span>
+      <span class="tag event" style="font-size:13px;padding:5px 12px">家庭 2次</span>
+      <span class="tag event" style="font-size:12px;padding:4px 10px">成就 3个</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- /monthly -->
+
+<!-- ========== PAGE: GOALS ========== -->
+<div class="page" id="page-goals">
+<div class="goal-grid">
+  <div class="goal-card">
+    <h3>💰 花费控制目标</h3>
+    <div class="goal-target">8月目标：额外花销 ≤ ¥5,000（有云南旅游）</div>
+    <div class="goal-bar"><div class="goal-fill purple" style="width:0%"></div></div>
+    <div class="goal-stats"><span>已花 ¥0 / ¥5,000</span><span>8月未开始</span></div>
+    <div style="margin-top:12px;font-size:12px;color:var(--muted)">9月起：≤ ¥3,000/月（理想 ¥2,000）</div>
+  </div>
+  <div class="goal-card">
+    <h3>🏃 运动目标</h3>
+    <div class="goal-target">每周运动 ≥ 4天 · 本月 16 次</div>
+    <div class="goal-bar"><div class="goal-fill green" style="width:94%"></div></div>
+    <div class="goal-stats"><span>本月 15/16 次</span><span>🔥 94%</span></div>
+    <div style="margin-top:8px;font-size:11px;color:var(--muted)">跑步 🏃 7次 · 游泳 🏊 4次 · 瑜伽 🧘 4次</div>
+  </div>
+  <div class="goal-card">
+    <h3>📚 阅读目标</h3>
+    <div class="goal-target">每月 ≥ 2 本书 · 每周 ≥ 5 天阅读</div>
+    <div class="goal-bar"><div class="goal-fill yellow" style="width:50%"></div></div>
+    <div class="goal-stats"><span>本月 1/2 本完成</span><span>📖 50%</span></div>
+    <div style="margin-top:8px;font-size:11px;color:var(--muted)">《原子习惯》62% · 下本待定</div>
+  </div>
+  <div class="goal-card">
+    <h3>🎯 生活管控计划</h3>
+    <div class="goal-target">全面管控：花费 · 运动 · 情绪 · 读书</div>
+    <div class="goal-bar"><div class="goal-fill purple" style="width:75%"></div></div>
+    <div class="goal-stats"><span>总体执行度 75%</span><span>📋 4维度追踪中</span></div>
+    <div style="margin-top:8px;font-size:11px;color:var(--muted)">📅 7月24日启动 · 持续优化中</div>
+  </div>
+</div>
+
+<div class="timeline">
+  <h2>📈 目标历史</h2>
+  <div class="day-row"><div class="day-date">7/24</div><div class="day-mood">🎯</div><div class="day-content"><p>正式启动生活管控计划，确立四大目标维度</p><div class="day-meta"><span class="tag event">里程碑</span></div></div></div>
+  <div class="day-row"><div class="day-date">7/24</div><div class="day-mood">💰</div><div class="day-content"><p>设定花费上限：8月≤5000，9月起≤3000（理想2000）</p><div class="day-meta"><span class="tag event">财务</span></div></div></div>
+</div>
+</div><!-- /goals -->
+
+<!-- ========== PAGE: KNOWLEDGE ========== -->
+<div class="page" id="page-knowledge">
+<div class="bottom-grid">
+  <div class="knowledge-card">
+    <h2>🧠 知识卡片</h2>
+    <div class="concept-item"><div class="name">工作记忆理论 <span class="concept-badge">Seedling</span></div><div class="desc">艾伦·巴德利提出的认知心理学核心理论</div></div>
+    <div class="concept-item"><div class="name">公地悲剧 <span class="concept-badge">Seedling</span></div><div class="desc">加勒特·哈丁：公共资源在个体理性下走向耗尽</div></div>
+    <div class="concept-item"><div class="name">INTP 认知资源分配策略 <span class="concept-badge">Seedling</span></div><div class="desc">基于 MBTI 人格的个人效能管理方法论</div></div>
+    <div class="concept-item"><div class="name">阅读与神经可塑性 <span class="concept-badge">Seedling</span></div><div class="desc">持续阅读如何重塑大脑结构与认知能力</div></div>
+    <div class="concept-item"><div class="name">AI 指挥官思维 <span class="concept-badge">Seedling</span></div><div class="desc">将 AI 视为指挥对象而非工具的新型协作范式</div></div>
+    <div class="concept-item"><div class="name">金字塔原理与认知负荷 <span class="concept-badge">Seedling</span></div><div class="desc">结构化表达降低认知负担的沟通方法论</div></div>
+    <div class="concept-item"><div class="name">职业理想与人生选择 <span class="concept-badge">Seedling</span></div><div class="desc">关于如何在不同人生阶段做职业决策的思考框架</div></div>
+  </div>
+  <div class="knowledge-card">
+    <h2>📚 读书书架</h2>
+    <div class="book-item"><div class="book-cover reading">📖</div><div class="book-info"><div class="title">原子习惯</div><div class="author">James Clear</div><div class="progress">📖 62% · 本周3天</div></div></div>
+    <h2 style="margin-top:20px">👤 人物</h2>
+    <div class="entity-item"><div class="name">加勒特·哈丁</div><div class="desc">生态学家 · 公地悲剧</div></div>
+    <div class="entity-item"><div class="name">艾伦·巴德利</div><div class="desc">认知心理学家 · 工作记忆</div></div>
+    <div class="entity-item"><div class="name">石黑一雄</div><div class="desc">日裔英籍作家 · 诺奖得主</div></div>
+  </div>
+</div>
+</div><!-- /knowledge -->
+
+<!-- ========== PAGE: SEARCH ========== -->
+<div class="page" id="page-search">
+  <input type="text" class="search-box" id="searchInput" placeholder="🔍  搜索记录、标签、金额…（试试搜「跑步」「游泳」「开心」）" autocomplete="off">
+  <div class="search-stats" id="searchStats">共 5 条记录 · 输入关键词开始搜索</div>
+  <div class="timeline" id="timelineSearch"></div>
+</div><!-- /search -->
+
+<footer>🌱 超超的个人知识库 & 生活仪表盘 · 数据来源 Obsidian Vault · Hermes 💜 打造 · v2.0 多页面版</footer>
+</div>
+
+<script>
+// ====== THEME ======
+document.getElementById('themeSwitcher').addEventListener('click',e=>{
+  const b=e.target.closest('.theme-btn');if(!b)return;
+  document.documentElement.setAttribute('data-theme',b.dataset.theme);
+  document.querySelectorAll('.theme-btn').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  renderAllCharts();
+});
+
+// ====== TAB NAVIGATION ======
+document.getElementById('navBar').addEventListener('click',e=>{
+  const tab=e.target.closest('.nav-tab');if(!tab)return;
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+tab.dataset.page).classList.add('active');
+  if(tab.dataset.page==='monthly') renderMonthlyCharts();
+  if(tab.dataset.page==='search') initSearch();
+  if(tab.dataset.page==='dashboard') renderDashboardCharts();
+});
+
+// ====== CSS VAR HELPER ======
+function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+
+// ====== CHART ENGINE ======
+let charts={};
+function kill(cs){Object.values(cs).forEach(c=>c.destroy());for(let k in cs)delete cs[k]}
+
+function makeChart(id,cfg){const ctx=document.getElementById(id);if(!ctx)return null;return new Chart(ctx,cfg)}
+
+function renderDashboardCharts(){
+  kill(charts);
+  const gc=cv('--border'),tc=cv('--muted'),a=cv('--accent'),p=cv('--purple'),gr=cv('--green'),y=cv('--yellow'),r=cv('--red'),cy=cv('--cyan'),cb=cv('--card');
+  charts.spend=makeChart('spendChart',{type:'bar',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'花费',data:[134,0,0,0,0,0,0],backgroundColor:a+'99',borderColor:a,borderWidth:1,borderRadius:6}]},options:{responsive:!0,maintainAspectRatio:!1,plugins:{legend:{display:!1}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:!1}},y:{ticks:{color:tc,callback:v=>'¥'+v,font:{size:10}},grid:{color:gc}}}}});
+    charts.mood=makeChart('moodChart',{type:'line',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'情绪',data:[5.5,null,null,null,null,null,null],borderColor:p,backgroundColor:p+'20',fill:!0,tension:.4,pointRadius:5,pointBackgroundColor:p,spanGaps:!1}]},options:{responsive:!0,maintainAspectRatio:!1,plugins:{legend:{display:!1}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:!1}},y:{min:1,max:10,ticks:{color:tc,stepSize:2,font:{size:10}},grid:{color:gc}}}});
+  charts.cat=makeChart('categoryChart',{type:'doughnut',data:{labels:['日用','餐饮','交通','娱乐','购物'],datasets:[{data:[107,27,0,0,0],backgroundColor:[a,gr,y,r,cy],borderWidth:2,borderColor:cb}]},options:{responsive:!0,maintainAspectRatio:!1,plugins:{legend:{position:'bottom',labels:{color:tc,padding:12,font:{size:11}}}}}});
+  charts.ex=makeChart('exerciseChart',{type:'bar',data:{labels:['本周','第1周','第2周','第3周'],datasets:[{label:'跑步',data:[0,2,1,2],backgroundColor:gr,borderRadius:4},{label:'游泳',data:[0,0,1,1],backgroundColor:cy,borderRadius:4},{label:'瑜伽',data:[0,1,0,1],backgroundColor:p,borderRadius:4}]},options:{responsive:!0,maintainAspectRatio:!1,plugins:{legend:{labels:{color:tc,usePointStyle:!0,pointStyleWidth:8,padding:14,font:{size:11}}}},scales:{x:{stacked:!0,ticks:{color:tc,font:{size:10}},grid:{display:!1}},y:{stacked:!0,ticks:{color:tc,stepSize:2,font:{size:10}},grid:{color:gc}}}}});
+}
+
+let monthlyCharts={};
+function renderMonthlyCharts(){
+  kill(monthlyCharts);
+  const gc=cv('--border'),tc=cv('--muted'),a=cv('--accent'),p=cv('--purple'),gr=cv('--green'),y=cv('--yellow'),cy=cv('--cyan');
+  monthlyCharts.ms=makeChart('monthSpendChart',{type:'line',data:{labels:['7/1','7/5','7/9','7/13','7/17','7/21','7/25'],datasets:[{label:'花费',data:[350,210,480,290,430,152,186],borderColor:a,backgroundColor:a+'15',fill:!0,tension:.4,pointRadius:5},{label:'周均',data:[330,330,330,330,330,330,330],borderColor:tc,borderDash:[5,5],pointRadius:0,fill:!1}]},options:{responsive:!0,maintainAspectRatio:!1,plugins:{legend:{labels:{color:tc,font:{size:10}}}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:!1}},y:{ticks:{color:tc,callback:v=>'¥'+v,font:{size:10}},grid:{color:gc}}}}});
+  monthlyCharts.rd=makeChart('readChart',{type:'bar',data:{labels:['第1周','第2周','第3周','第4周'],datasets:[{label:'阅读天数',data:[5,4,5,4],backgroundColor:cy+'99',borderColor:cy,borderWidth:1,borderRadius:6}]},options:{responsive:!0,maintainAspectRatio:!1,plugins:{legend:{display:!1}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:!1}},y:{max:7,ticks:{color:tc,stepSize:1,font:{size:10}},grid:{color:gc}}}}});
+  // Mood calendar
+  renderMoodCal();
+}
+
+function renderMoodCal(){
+  const cal=document.getElementById('moodCal');if(!cal)return;
+  const moods=['great','great','good','great','good','great','great','good','great','meh','good','great','good','great','great','ok','good','good','great','ok','meh','good','great','good','good'];
+  cal.innerHTML='';
+  // July 2026 starts on Wednesday. 31 days. Pad with empties.
+  const empties=3; // Wed=3 empty cells (Mon-Sun grid)
+  for(let i=0;i<empties;i++)cal.innerHTML+='<div class="mood-cell empty"></div>';
+  for(let i=0;i<Math.min(31,moods.length);i++){
+    const m=moods[i];
+    const emoji=m==='great'?'😄':m==='good'?'🙂':m==='ok'?'😐':'😞';
+    cal.innerHTML+=`<div class="mood-cell ${m}" title="7/${i+1}: ${m}">${emoji}</div>`;
+  }
+}
+
+// ====== SEARCH ======
+function initSearch(){
+  const input=document.getElementById('searchInput');
+  const timeline=document.getElementById('timelineSearch');
+  const stats=document.getElementById('searchStats');
+  // Source data from dashboard timeline
+  const src=document.getElementById('timelineDash');
+  if(!src){timeline.innerHTML='<div class="empty-state">暂无数据</div>';return}
+  const rows=src.querySelectorAll('.day-row');
+  const allData=Array.from(rows).map(r=>({
+    date:r.querySelector('.day-date')?.textContent||'',
+    mood:r.querySelector('.day-mood')?.textContent||'',
+    text:r.querySelector('.day-content p')?.textContent||'',
+    meta:r.querySelector('.day-meta')?.textContent||'',
+    el:r.cloneNode(!0)
+  }));
+  stats.textContent=`共 ${allData.length} 条记录 · 输入关键词搜索`;
+  timeline.innerHTML='';
+  allData.forEach(d=>{d.el.classList.remove('hidden');timeline.appendChild(d.el)});
+
+  input.addEventListener('input',()=>{
+    const q=input.value.toLowerCase().trim();
+    let count=0;
+    allData.forEach(d=>{
+      const match=!q||d.text.toLowerCase().includes(q)||d.meta.toLowerCase().includes(q)||d.date.includes(q);
+      d.el.classList.toggle('hidden',!match);
+      if(match)count++;
+    });
+    stats.textContent=q?`找到 ${count} 条匹配 "${q}"`:`共 ${allData.length} 条记录 · 输入关键词搜索`;
+  });
+}
+
+// ====== INIT ======
+renderDashboardCharts();
+
+// Pre-render mood calendar HTML structure (lazy when tab clicked)
+</script>
+</body>
+</html>
