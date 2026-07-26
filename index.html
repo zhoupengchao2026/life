@@ -40,7 +40,8 @@ header{display:flex;justify-content:space-between;align-items:center;flex-wrap:w
 .theme-btn.active{transform:scale(1.18);box-shadow:0 0 0 3px var(--accent)}.theme-btn:hover{transform:scale(1.1)}
 
 /* Page sections */
-.page{display:none}.page.active{display:block}
+.page{display:block;margin-bottom:16px}
+.page-section{scroll-margin-top:100px}
 
 /* KPI */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:24px}
@@ -324,7 +325,7 @@ footer a{color:var(--accent2);text-decoration:none}
     try{renderDashboardCharts();}catch(ex){}
   });
 })();
-// TABS
+// TABS (scroll to section)
 (function(){
   var n=document.getElementById('navBar');if(!n)return;
   n.addEventListener('click',function(e){
@@ -332,10 +333,8 @@ footer a{color:var(--accent2);text-decoration:none}
     var tabs=document.querySelectorAll('.nav-tab');
     for(var i=0;i<tabs.length;i++)tabs[i].classList.remove('active');
     tab.classList.add('active');
-    var pages=document.querySelectorAll('.page');
-    for(var j=0;j<pages.length;j++)pages[j].classList.remove('active');
-    var page=document.getElementById('page-'+tab.dataset.page);
-    if(page)page.classList.add('active');
+    var target=document.getElementById('page-'+tab.dataset.page);
+    if(target){target.scrollIntoView({behavior:'smooth',block:'start'});}
     try{
       if(tab.dataset.page==='monthly')renderMonthlyCharts();
       if(tab.dataset.page==='search')initSearch();
