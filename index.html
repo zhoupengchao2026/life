@@ -129,14 +129,14 @@ footer a{color:var(--accent2);text-decoration:none}
   <div class="logo"><h1>🌱 超超的生活仪表盘</h1><span>记录每一天 · 看见成长的轨迹</span></div>
   <div class="header-right">
     <div class="theme-switcher" id="themeSwitcher">
-      <btn class="theme-btn candy" data-theme="candy" title="糖果粉">🍬</btn>
-      <btn class="theme-btn forest" data-theme="forest" title="森林绿">🌿</btn>
-      <btn class="theme-btn ocean" data-theme="ocean" title="海洋蓝">🌊</btn>
-      <btn class="theme-btn lavender" data-theme="lavender" title="薰衣草">💜</btn>
-      <btn class="theme-btn sunrise active" data-theme="sunrise" title="朝阳橙">🌄</btn>
-      <btn class="theme-btn dark" data-theme="dark" title="暗色月亮">🌙</btn>
-      <btn class="theme-btn warm" data-theme="warm" title="温暖太阳">☀️</btn>
-      <btn class="theme-btn sunset" data-theme="sunset" title="日落橙">🌅</btn>
+      <button class="theme-btn candy" data-theme="candy" title="糖果粉">🍬</button>
+      <button class="theme-btn forest" data-theme="forest" title="森林绿">🌿</button>
+      <button class="theme-btn ocean" data-theme="ocean" title="海洋蓝">🌊</button>
+      <button class="theme-btn lavender" data-theme="lavender" title="薰衣草">💜</button>
+      <button class="theme-btn sunrise active" data-theme="sunrise" title="朝阳橙">🌄</button>
+      <button class="theme-btn dark" data-theme="dark" title="暗色月亮">🌙</button>
+      <button class="theme-btn warm" data-theme="warm" title="温暖太阳">☀️</button>
+      <button class="theme-btn sunset" data-theme="sunset" title="日落橙">🌅</button>
     </div>
   </div>
 </header>
@@ -312,26 +312,42 @@ footer a{color:var(--accent2);text-decoration:none}
 </div>
 
 <script>
-// ====== THEME ======
-document.getElementById('themeSwitcher').addEventListener('click',e=>{
-  const b=e.target.closest('.theme-btn');if(!b)return;
-  document.documentElement.setAttribute('data-theme',b.dataset.theme);
-  document.querySelectorAll('.theme-btn').forEach(x=>x.classList.remove('active'));
-  b.classList.add('active');
-  renderDashboardCharts();
-});
+// ====== THEME (runs first, no deps) ======
+(function(){
+  var s=document.getElementById('themeSwitcher');
+  if(!s)return;
+  s.addEventListener('click',function(e){
+    var b=e.target.closest('.theme-btn');
+    if(!b)return;
+    document.documentElement.setAttribute('data-theme',b.dataset.theme);
+    var all=document.querySelectorAll('.theme-btn');
+    for(var i=0;i<all.length;i++)all[i].classList.remove('active');
+    b.classList.add('active');
+    try{renderDashboardCharts();}catch(ex){}
+  });
+})();
 
 // ====== TAB NAVIGATION ======
-document.getElementById('navBar').addEventListener('click',e=>{
-  const tab=e.target.closest('.nav-tab');if(!tab)return;
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  tab.classList.add('active');
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+tab.dataset.page).classList.add('active');
-  if(tab.dataset.page==='monthly') renderMonthlyCharts();
-  if(tab.dataset.page==='search') initSearch();
-  if(tab.dataset.page==='dashboard') renderDashboardCharts();
-});
+(function(){
+  var n=document.getElementById('navBar');
+  if(!n)return;
+  n.addEventListener('click',function(e){
+    var tab=e.target.closest('.nav-tab');
+    if(!tab)return;
+    var allT=document.querySelectorAll('.nav-tab');
+    for(var i=0;i<allT.length;i++)allT[i].classList.remove('active');
+    tab.classList.add('active');
+    var allP=document.querySelectorAll('.page');
+    for(var j=0;j<allP.length;j++)allP[j].classList.remove('active');
+    var page=document.getElementById('page-'+tab.dataset.page);
+    if(page)page.classList.add('active');
+    try{
+      if(tab.dataset.page==='monthly')renderMonthlyCharts();
+      if(tab.dataset.page==='search')initSearch();
+      if(tab.dataset.page==='dashboard')renderDashboardCharts();
+    }catch(ex){}
+  });
+})();
 
 // ====== CSS VAR HELPER ======
 function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
@@ -408,7 +424,7 @@ function initSearch(){
 }
 
 // ====== INIT ======
-renderDashboardCharts();
+try{renderDashboardCharts();}catch(ex){console.log('Chart init skipped, page still works')}
 
 // Pre-render mood calendar HTML structure (lazy when tab clicked)
 </script>
