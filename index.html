@@ -155,7 +155,7 @@ footer a{color:var(--accent2);text-decoration:none}
 <div class="page active" id="page-dashboard">
 
 <div class="kpi-grid">
-  <div class="kpi"><div class="label">💰 本周花费</div><div class="value c-yellow">¥168</div><div class="delta">预算 ¥1,200/周 · 剩余 ¥1,032</div><div class="bar-track"><div class="bar-fill yellow" style="width:14%"></div></div></div>
+  <div class="kpi"><div class="label">💰 本周花费</div><div class="value c-yellow">¥181</div><div class="delta">预算 ¥1,200/周 · 剩余 ¥1,019</div><div class="bar-track"><div class="bar-fill yellow" style="width:15%"></div></div></div>
   <div class="kpi"><div class="label">🏃 本周运动</div><div class="value c-green">0<span style="font-size:16px;color:var(--muted)">/7天</span></div><div class="delta">做了家务 · 无正式运动</div></div>
   <div class="kpi"><div class="label">😊 今日情绪</div><div class="value c-purple">5.5<span style="font-size:16px;color:var(--muted)">/10</span></div><div class="delta">大姨妈+孤单 · 波动大</div></div>
   <div class="kpi"><div class="label">📚 本周阅读</div><div class="value c-cyan">0<span style="font-size:16px;color:var(--muted)">天</span></div><div class="delta">下周继续《原子习惯》</div></div>
@@ -172,7 +172,7 @@ footer a{color:var(--accent2);text-decoration:none}
   <h2>📅 本周记录（7/25 - 7/31）</h2>
   <div class="day-row"><div class="day-date">7/25 周六</div><div class="day-mood">😞</div><div class="day-content"><p>弟弟因台风提前回深圳，感到孤单想哭。大姨妈第一天身体不适。花了 ¥134 买枕头和日用品。</p><div class="day-meta">💸 ¥134.47 <span class="tag event">家庭</span><span class="tag mood">孤单</span><span class="tag sport">家务</span></div></div></div>
   <div class="day-row"><div class="day-date">7/26 周日</div><div class="day-mood">🙂</div><div class="day-content"><p>自己做了午饭：空气炸锅金针菇+炒杭白菜 🍳 口味还不错。跟爸爸弟弟打了电话。</p><div class="day-meta">💸 ¥33.96 <span class="tag event">做饭</span><span class="tag event">家庭</span></div></div></div>
-  <div class="day-row" style="opacity:0.4"><div class="day-date">7/27 周一</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta">记得找Hermes打卡哦</div></div></div>
+  <div class="day-row"><div class="day-date">7/27 周一</div><div class="day-mood">😐</div><div class="day-content"><p>早上噩梦醒来很难过。下雨打车上班。好消息：保险预缴能赚四五千，决定下半年不买衣服 💰</p><div class="day-meta">💸 ¥12.43 <span class="tag event">省钱计划</span><span class="tag mood">起起伏伏</span></div></div></div>
   <div class="day-row" style="opacity:0.4"><div class="day-date">7/28 周二</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta"></div></div></div>
   <div class="day-row" style="opacity:0.4"><div class="day-date">7/29 周三</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta"></div></div></div>
   <div class="day-row" style="opacity:0.4"><div class="day-date">7/30 周四</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta"></div></div></div>
@@ -369,9 +369,9 @@ function renderDashboardCharts(){
   Object.values(charts).forEach(function(c){c.destroy();});charts={};
   var gc=cv('--border'),tc=cv('--muted'),a=cv('--accent'),p=cv('--purple'),g=cv('--green'),y=cv('--yellow'),r=cv('--red'),c=cv('--cyan'),cb=cv('--card');
   var copts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc}}}};
-  charts.spend=makeChart('spendChart',{type:'bar',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'花费',data:[134,34,0,0,0,0,0],backgroundColor:a+'99',borderColor:a,borderWidth:1,borderRadius:6}]},options:copts});
+  charts.spend=makeChart('spendChart',{type:'bar',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'花费',data:[134,34,12,0,0,0,0],backgroundColor:a+'99',borderColor:a,borderWidth:1,borderRadius:6}]},options:copts});
   var mcopts=JSON.parse(JSON.stringify(copts));mcopts.scales.y.min=1;mcopts.scales.y.max=10;mcopts.scales.y.ticks.stepSize=2;
-  charts.mood=makeChart('moodChart',{type:'line',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'情绪',data:[5.5,6,null,null,null,null,null],borderColor:p,backgroundColor:p+'20',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:p,spanGaps:false}]},options:mcopts});
+  charts.mood=makeChart('moodChart',{type:'line',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'情绪',data:[5.5,6,5.5,null,null,null,null],borderColor:p,backgroundColor:p+'20',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:p,spanGaps:false}]},options:mcopts});
   charts.cat=makeChart('categoryChart',{type:'doughnut',data:{labels:['日用','餐饮','交通','娱乐','购物'],datasets:[{data:[107,27,0,0,0],backgroundColor:[a,g,y,r,c],borderWidth:2,borderColor:cb}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:tc,padding:12,font:{size:11}}}}}});
   charts.ex=makeChart('exerciseChart',{type:'bar',data:{labels:['本周','第1周','第2周','第3周'],datasets:[{label:'跑步',data:[0,2,1,2],backgroundColor:g,borderRadius:4},{label:'游泳',data:[0,0,1,1],backgroundColor:c,borderRadius:4},{label:'瑜伽',data:[0,1,0,1],backgroundColor:p,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc,usePointStyle:true,pointStyleWidth:8,padding:14,font:{size:11}}}},scales:{x:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{stacked:true,ticks:{color:tc,stepSize:2,font:{size:10}},grid:{color:gc}}}}});
 }
