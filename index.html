@@ -75,6 +75,12 @@ header{display:flex;justify-content:space-between;align-items:center;flex-wrap:w
 .tag.mood{background:rgba(168,85,247,.12);color:var(--purple)}.tag.book{background:rgba(99,102,241,.12);color:var(--accent)}
 .tag.event{background:rgba(234,179,8,.12);color:var(--yellow)}.tag.sport{background:rgba(34,197,94,.12);color:var(--green)}
 
+/* Murmur tabs */
+.murmur-tab{padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-size:12px;cursor:pointer;font-family:inherit;transition:all .2s}
+.murmur-tab:hover{color:var(--text);border-color:var(--accent2)}
+.murmur-tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+.murmur-day{display:none}.murmur-day.active{display:block}
+
 /* Search */
 .search-box{width:100%;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:14px;font-family:inherit;margin-bottom:20px;transition:border-color .2s}
 .search-box:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(99,102,241,.1)}
@@ -181,10 +187,27 @@ footer a{color:var(--accent2);text-decoration:none}
 
 
 <div class="timeline" style="margin-top:16px">
-  <h2>💬 今日碎碎念</h2>
-  <p style="font-size:14px;color:var(--text);line-height:1.8;margin-bottom:12px">
-    大姨妈没怎么动弹，但做了不少家务——老爸不在，洗菜切菜炒菜刷锅刷碗扫地倒垃圾，从10点多干到快12点，腰酸背疼 😮‍💨 上午下午上了三节英语课，还花了几小时整理笔记，看了个视频讲怎么建立知识体系。心情比昨天好一些，虽然孤单感还在。
-  </p>
+  <h2>💬 每日碎碎念</h2>
+  <div style="display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap" id="murmurTabs">
+    <button class="murmur-tab active" data-day="0725">7/25 周六</button>
+    <button class="murmur-tab" data-day="0726">7/26 周日</button>
+    <button class="murmur-tab" data-day="0727">7/27 周一</button>
+    <button class="murmur-tab" data-day="0728">7/28 周二</button>
+  </div>
+  <div id="murmurContent">
+    <div class="murmur-day active" id="murmur-0725">
+      <p style="font-size:14px;color:var(--text);line-height:1.8">弟弟下午来了，本来以为能住到明天，结果因为台风预警今晚临时坐顺风车回深圳了。爸爸住了四个月周一回了老家，习惯了有人照顾有人等的日子，突然一个人有点孤单。大姨妈第一天身体不舒服，下午做了点家务（洗衣晾晒熨衣）心情还不错，弟弟走后就感觉难过想哭。加班处理数据遇到权限问题反复折腾。老板聊晋升，有个项目可能对升4级有帮助但不太确定。大促商城搜索还行但整体完成度和渗透率不理想。控费第一天，花了¥134买枕头和日用品，都是必需品。今天心情一会儿开心一会儿难过，波动很大。</p>
+    </div>
+    <div class="murmur-day" id="murmur-0726">
+      <p style="font-size:14px;color:var(--text);line-height:1.8">周日，中午自己做饭花了一个多小时——空气炸锅烤金针菇+炒杭白菜，刮姜刮得腰酸手疼，口味还行。给爸爸和弟弟打了电话。上午下午上了三节英语课，还花了几小时整理了20多篇一周的录音笔记发给Hermes。大姨妈期间没正式运动但做了不少家务：洗菜切菜炒菜刷锅刷碗、扫地、洗内裤、收拾明天东西、倒了两大袋很重的垃圾，从10点多干到快12点腰酸背疼。心情比昨天好一些（6/10），孤单感还在。看了个视频讲怎么建立知识体系——读书要读感兴趣的、跟生活链接、主动思考。想扩展社科阅读面，最近两周读书太少。听说顺风车司机一天跑四趟挣200多块养四个孩子，感触良多。</p>
+    </div>
+    <div class="murmur-day" id="murmur-0727">
+      <p style="font-size:14px;color:var(--text);line-height:1.8">早上做了噩梦——梦见妈妈身体好了抱着亲，又梦见爸爸生了四种病。醒来很难过（妈妈去世十几年了）。下雨打车上班¥8.74。到公司后老板批了审批，渗透率好了一丢丢，心情稍微好一点。下午渗透率又回落，战略说目标不能改了。好消息：保险朋友说今年+明年一起交有6%预缴利息，能赚四五千→8月旅行费有了！决定下半年不买衣服（秋冬够了）、断舍离少买东西（明年搬家）。晚上吃了太多主食困得直接睡，10点爬起来上了一节英语课脑子蒙蒙的。立了flag：这周至少运动3次。花了¥12.43全是交通费，无冲动消费。</p>
+    </div>
+    <div class="murmur-day" id="murmur-0728">
+      <p style="font-size:14px;color:var(--text);line-height:1.8">熬夜到两三点，早上头痛请假补觉，梦里一直打打杀杀做噩梦，上午心情sad。中午食堂鳗鱼轻食，量太大没吃完有点浪费。下午慢慢进入工作状态——在群里坦诚承认之前目标估不准，写清原因+结果+后续建议，同事们点赞。克服惰性处理了看板细节问题。傍晚嗓子不太舒服，跟伊林一起走不太想说话。回来跟老爸打了会儿视频。8点参加表达实践课，分享了"一直在探寻人生意义"，和一个同学交流了"勇敢"的话题——他头像是在公园里肆无忌惮开心跑步的样子，很有共鸣，过程很治愈。之后收拾出差衣服洗漱用品、晾收衣服、洗澡，干到12:30。花了¥7（微信读书30天挑战¥5+骑车¥2）。比昨天心情好一点，但上午还是挺sad的。</p>
+    </div>
+  </div>
 </div>
 <div class="timeline" style="margin-top:16px">
   <h2>💡 感悟 & 计划</h2>
@@ -428,6 +451,22 @@ function initSearch(){
     stats.textContent=q?'找到 '+count+' 条匹配 "'+q+'"':'共 '+allData.length+' 条记录 · 输入关键词搜索';
   };
 }
+
+// ====== MURMUR TABS ======
+(function(){
+  var mt=document.getElementById('murmurTabs');if(!mt)return;
+  mt.addEventListener('click',function(e){
+    var tab=e.target.closest('.murmur-tab');if(!tab)return;
+    var allT=mt.querySelectorAll('.murmur-tab');
+    for(var i=0;i<allT.length;i++)allT[i].classList.remove('active');
+    tab.classList.add('active');
+    var allD=document.querySelectorAll('.murmur-day');
+    for(var j=0;j<allD.length;j++)allD[j].classList.remove('active');
+    var day=document.getElementById('murmur-'+tab.dataset.day);
+    if(day)day.classList.add('active');
+  });
+})();
+
 try{renderDashboardCharts();}catch(ex){}
 
 
