@@ -180,7 +180,7 @@ footer a{color:var(--accent2);text-decoration:none}
   <div class="day-row"><div class="day-date">7/26 周日</div><div class="day-mood">🙂</div><div class="day-content"><p>自己做了午饭：空气炸锅金针菇+炒杭白菜 🍳 口味还不错。跟爸爸弟弟打了电话。</p><div class="day-meta">💸 ¥33.96 <span class="tag event">做饭</span><span class="tag event">家庭</span></div></div></div>
   <div class="day-row"><div class="day-date">7/27 周一</div><div class="day-mood">😐</div><div class="day-content"><p>早上噩梦醒来很难过。下雨打车上班。好消息：保险预缴能赚四五千，决定下半年不买衣服 💰</p><div class="day-meta">💸 ¥12.43 <span class="tag event">省钱计划</span><span class="tag mood">起起伏伏</span></div></div></div>
   <div class="day-row"><div class="day-date">7/28 周二</div><div class="day-mood">😐</div><div class="day-content"><p>熬夜头痛请假补觉。下午坦诚承认目标估不准→同事点赞。表达实践课分享了"探寻人生意义" 🎤</p><div class="day-meta">💸 ¥7 <span class="tag event">表达课</span><span class="tag mood">上午sad下午好转</span></div></div></div>
-  <div class="day-row" style="opacity:0.4"><div class="day-date">7/29 周三</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta"></div></div></div>
+  <div class="day-row"><div class="day-date">7/29 周三</div><div class="day-mood">😐</div><div class="day-content"><p>看板新功能反复出问题，计划全delay。控制脾气跟实习生理清事情。明天吉隆坡！</p><div class="day-meta">💸 ¥0 <span class="tag event">吉隆坡</span><span class="tag mood">控脾气</span></div></div></div>
   <div class="day-row" style="opacity:0.4"><div class="day-date">7/30 周四</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta"></div></div></div>
   <div class="day-row" style="opacity:0.4"><div class="day-date">7/31 周五</div><div class="day-mood">—</div><div class="day-content"><p>📭 等待记录…</p><div class="day-meta">周六复盘见！</div></div></div>
 </div>
@@ -193,6 +193,7 @@ footer a{color:var(--accent2);text-decoration:none}
     <button class="murmur-tab" data-day="0726">7/26 周日</button>
     <button class="murmur-tab" data-day="0727">7/27 周一</button>
     <button class="murmur-tab" data-day="0728">7/28 周二</button>
+    <button class="murmur-tab" data-day="0729">7/29 周三</button>
   </div>
   <div id="murmurContent">
     <div class="murmur-day active" id="murmur-0725">
@@ -208,7 +209,10 @@ footer a{color:var(--accent2);text-decoration:none}
       <p style="font-size:14px;color:var(--text);line-height:1.8">熬夜到两三点，早上头痛请假补觉，梦里一直打打杀杀做噩梦，上午心情sad。中午食堂鳗鱼轻食，量太大没吃完有点浪费。下午慢慢进入工作状态——在群里坦诚承认之前目标估不准，写清原因+结果+后续建议，同事们点赞。克服惰性处理了看板细节问题。傍晚嗓子不太舒服，跟艺琳一起走不太想说话。回来跟老爸打了会儿视频。8点参加表达实践课，分享了"一直在探寻人生意义"，和一个同学交流了"勇敢"的话题——她头像是老友记的菲比，在公园里肆意奔跑的样子，很有共鸣，过程很治愈。之后收拾出差衣服洗漱用品、晾收衣服、洗澡，干到12:30。花了¥7（微信读书30天挑战¥5+骑车¥2）。比昨天心情好一点，但上午还是挺sad的。</p>
     </div>
   </div>
-</div>
+    <div class="murmur-day" id="murmur-0729">
+      <p style="font-size:14px;color:var(--text);line-height:1.8">今日花费¥0——早上骑行卡、晚上同事打车送回家。工作不顺利：看板新功能反复出问题，本来计划的数据检查全delay，实习生数据处理也没搞完。但控制住了脾气，跟实习生沟通时把事情理清楚没发火。艺琳有点搞不灵清但人很好，还要参加歌唱比赛🎤。重新读《好好学习》，里面讲九宫格复盘法，想在网站上也搞一个。明天出发去吉隆坡！昨晚已收拾差不多，今晚不洗头明天戴帽子🧢。连续5天没运动了😅。</p>
+    </div>
+  </div>
 <div class="timeline" style="margin-top:16px">
   <h2>💡 感悟 & 计划</h2>
   <div style="display:flex;flex-wrap:wrap;gap:8px">
@@ -394,7 +398,7 @@ function renderDashboardCharts(){
   var copts={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc}}}};
   charts.spend=makeChart('spendChart',{type:'bar',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'花费',data:[134,34,12,7,0,0,0],backgroundColor:a+'99',borderColor:a,borderWidth:1,borderRadius:6}]},options:copts});
   var mcopts=JSON.parse(JSON.stringify(copts));mcopts.scales.y.min=1;mcopts.scales.y.max=10;mcopts.scales.y.ticks.stepSize=2;
-  charts.mood=makeChart('moodChart',{type:'line',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'情绪',data:[5.5,6,5.5,5.5,null,null,null],borderColor:p,backgroundColor:p+'20',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:p,spanGaps:false}]},options:mcopts});
+  charts.mood=makeChart('moodChart',{type:'line',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'情绪',data:[5.5,6,5.5,5.5,5.5,null,null],borderColor:p,backgroundColor:p+'20',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:p,spanGaps:false}]},options:mcopts});
   charts.cat=makeChart('categoryChart',{type:'doughnut',data:{labels:['日用','餐饮','交通','娱乐','购物'],datasets:[{data:[107,27,0,0,0],backgroundColor:[a,g,y,r,c],borderWidth:2,borderColor:cb}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:tc,padding:12,font:{size:11}}}}}});
   charts.ex=makeChart('exerciseChart',{type:'bar',data:{labels:['本周','第1周','第2周','第3周'],datasets:[{label:'跑步',data:[0,2,1,2],backgroundColor:g,borderRadius:4},{label:'游泳',data:[0,0,1,1],backgroundColor:c,borderRadius:4},{label:'瑜伽',data:[0,1,0,1],backgroundColor:p,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc,usePointStyle:true,pointStyleWidth:8,padding:14,font:{size:11}}}},scales:{x:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{stacked:true,ticks:{color:tc,stepSize:2,font:{size:10}},grid:{color:gc}}}}});
 }
