@@ -107,7 +107,46 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Inter','N
   <div class="card"><h3>📈 花费趋势</h3><div class="cw"><canvas id="spendC"></canvas></div></div>
   <div class="card"><h3>🎭 情绪波动</h3><div class="cw"><canvas id="moodC"></canvas></div></div>
   <div class="card"><h3>🍩 花费分类</h3><div class="cw" style="max-height:220px"><canvas id="catC"></canvas></div></div>
-  <div class="card"><h3>🔥 运动分布</h3><div class="cw"><canvas id="exC"></canvas></div></div>
+  <div class="card"><h3>🔥 本周活动（真实记录）</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;padding:12px 0">
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-align:center">
+        <div style="font-size:11px;color:var(--muted)">7/25</div>
+        <div style="font-size:24px;margin:4px 0">🧹</div>
+        <div style="font-size:11px">家务</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-align:center">
+        <div style="font-size:11px;color:var(--muted)">7/26</div>
+        <div style="font-size:24px;margin:4px 0">🍳</div>
+        <div style="font-size:11px">做饭</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-align:center;opacity:.4">
+        <div style="font-size:11px;color:var(--muted)">7/27</div>
+        <div style="font-size:24px;margin:4px 0">—</div>
+        <div style="font-size:11px">休息</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-align:center;opacity:.4">
+        <div style="font-size:11px;color:var(--muted)">7/28</div>
+        <div style="font-size:24px;margin:4px 0">—</div>
+        <div style="font-size:11px">休息</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-align:center;opacity:.4">
+        <div style="font-size:11px;color:var(--muted)">7/29</div>
+        <div style="font-size:24px;margin:4px 0">—</div>
+        <div style="font-size:11px">休息</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-align:center">
+        <div style="font-size:11px;color:var(--muted)">7/30</div>
+        <div style="font-size:24px;margin:4px 0">🚶</div>
+        <div style="font-size:11px">机场走路</div>
+      </div>
+      <div style="background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;text-align:center">
+        <div style="font-size:11px;color:var(--muted)">7/31</div>
+        <div style="font-size:24px;margin:4px 0">🏸</div>
+        <div style="font-size:11px">运动会</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:4px">🎯 目标：3次/周 · 本周：2天活动 ≤ 家务做饭</div>
+  </div>
 </div>
 
 <div class="card">
@@ -363,7 +402,7 @@ function rDash(){
   var o2=JSON.parse(JSON.stringify(o));o2.scales.y.min=1;o2.scales.y.max=10;o2.scales.y.ticks.stepSize=2;
   C.mo=mc('moodC',{type:'line',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'情绪',data:[5.5,6,5.5,5.5,5.5,6,6.5],borderColor:p,backgroundColor:p+'20',fill:true,tension:.4,pointRadius:5,pointBackgroundColor:p,spanGaps:false}]},options:o2});
   C.ca=mc('catC',{type:'doughnut',data:{labels:['日用','餐饮','交通','娱乐','购物'],datasets:[{data:[140,196,12,33,0],backgroundColor:[a,g,y,r,c],borderWidth:2,borderColor:cb}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:tc,padding:10,font:{size:10}}}}}});
-  C.ex=mc('exC',{type:'bar',data:{labels:['本周','第1周','第2周','第3周'],datasets:[{label:'跑步',data:[0,2,1,2],backgroundColor:g,borderRadius:4},{label:'游泳',data:[0,0,1,1],backgroundColor:c,borderRadius:4},{label:'瑜伽',data:[0,1,0,1],backgroundColor:p,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc,usePointStyle:true,pointStyleWidth:6,padding:12,font:{size:10}}}},scales:{x:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{stacked:true,ticks:{color:tc,stepSize:2,font:{size:10}},grid:{color:gc}}}}});
+  
 }
 var MC={};
 function rMon(){
