@@ -95,9 +95,9 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Inter','N
 <div class="sec" id="page-dash">
 
 <div class="kpi-r">
-  <div class="kpi"><div class="l">💰 本周花费</div><div class="v" style="color:var(--y)">¥354</div><div class="d">预算 ¥1,200/周 · 剩余 ¥846</div><div class="bar"><div style="width:30%;background:var(--y)"></div></div></div>
-  <div class="kpi"><div class="l">🏃 本周运动</div><div class="v" style="color:var(--g)">0<span style="font-size:14px;color:var(--muted)">/7天</span></div><div class="d">机场走路 · 目标3次</div></div>
-  <div class="kpi"><div class="l">😊 今日情绪</div><div class="v" style="color:var(--p)">6.0<span style="font-size:14px;color:var(--muted)">/10</span></div><div class="d">飞吉隆坡，比昨天好</div></div>
+  <div class="kpi"><div class="l">💰 本周花费</div><div class="v" style="color:var(--y)">¥387</div><div class="d">预算 ¥1,200/周 · 剩余 ¥813</div><div class="bar"><div style="width:32%;background:var(--y)"></div></div></div>
+  <div class="kpi"><div class="l">🏃 本周运动</div><div class="v" style="color:var(--g)">0<span style="font-size:14px;color:var(--muted)">/7天</span></div><div class="d">运动会2nd🏆 · 目标3次</div></div>
+  <div class="kpi"><div class="l">😊 今日情绪</div><div class="v" style="color:var(--p)">6.5<span style="font-size:14px;color:var(--muted)">/10</span></div><div class="d">运动会+breakthrough</div></div>
   <div class="kpi"><div class="l">📚 本周阅读</div><div class="v" style="color:var(--c)">1<span style="font-size:14px;color:var(--muted)">本在读</span></div><div class="d">《好好学习》九宫格复盘</div></div>
 </div>
 
@@ -118,7 +118,7 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Inter','N
   <div class="tl-r"><div class="tl-d">7/28 二</div><div class="tl-m">😐</div><div class="tl-c"><p>熬夜头痛请假补觉。下午坦诚承认目标估不准→同事点赞。表达实践课分享"探寻人生意义"🎤</p><div class="tl-me">💸 ¥7 <span class="tag e">表达课</span><span class="tag m">上午sad下午好转</span></div></div></div>
   <div class="tl-r"><div class="tl-d">7/29 三</div><div class="tl-m">😐</div><div class="tl-c"><p>看板新功能反复出问题，计划全delay。控制脾气跟实习生理清事情。明天吉隆坡！</p><div class="tl-me">💸 ¥0 <span class="tag e">吉隆坡</span><span class="tag m">控脾气</span></div></div></div>
   <div class="tl-r"><div class="tl-d">7/30 四</div><div class="tl-m">🙂</div><div class="tl-c"><p>飞吉隆坡！买了饭团+曲奇送前leader Bell🎁。饭团忘厕所被阿姨收走又找回。反思：饿时容易恶意揣度别人。</p><div class="tl-me">💸 HK$157≈¥144+酒店¥23=¥167 <span class="tag e">吉隆坡</span><span class="tag m">反思</span></div></div></div>
-  <div class="tl-r" style="opacity:.35"><div class="tl-d">7/31 五</div><div class="tl-m">—</div><div class="tl-c"><p>📭 等待记录…</p></div></div>
+  <div class="tl-r"><div class="tl-d">7/31 五</div><div class="tl-m">🙂</div><div class="tl-c"><p>部门运动会拿第二🏆！跟Naomi聊了一次breakthrough。晚饭英语听不懂有点沮丧。酒店¥33。</p><div class="tl-me">💸 ¥32.57 <span class="tag s">运动会</span><span class="tag e">breakthrough</span></div></div></div>
 </div>
 
 <div class="card">
@@ -355,10 +355,10 @@ function rDash(){
   Object.values(C).forEach(function(c){c.destroy()});C={};
   var gc=cv('--border'),tc=cv('--muted'),a=cv('--accent'),p=cv('--p'),g=cv('--g'),y=cv('--y'),r=cv('--r'),c=cv('--c'),cb=cv('--card');
   var o={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc}}}};
-  C.sp=mc('spendC',{type:'bar',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'花费',data:[134,34,12,7,0,167,0],backgroundColor:a+'99',borderColor:a,borderWidth:1,borderRadius:6}]},options:o});
+  C.sp=mc('spendC',{type:'bar',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'花费',data:[134,34,12,7,0,167,33],backgroundColor:a+'99',borderColor:a,borderWidth:1,borderRadius:6}]},options:o});
   var o2=JSON.parse(JSON.stringify(o));o2.scales.y.min=1;o2.scales.y.max=10;o2.scales.y.ticks.stepSize=2;
-  C.mo=mc('moodC',{type:'line',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'情绪',data:[5.5,6,5.5,5.5,5.5,6,null],borderColor:p,backgroundColor:p+'20',fill:true,tension:.4,pointRadius:5,pointBackgroundColor:p,spanGaps:false}]},options:o2});
-  C.ca=mc('catC',{type:'doughnut',data:{labels:['日用','餐饮','交通','娱乐','购物'],datasets:[{data:[140,196,12,0,0],backgroundColor:[a,g,y,r,c],borderWidth:2,borderColor:cb}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:tc,padding:10,font:{size:10}}}}}});
+  C.mo=mc('moodC',{type:'line',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'情绪',data:[5.5,6,5.5,5.5,5.5,6,6.5],borderColor:p,backgroundColor:p+'20',fill:true,tension:.4,pointRadius:5,pointBackgroundColor:p,spanGaps:false}]},options:o2});
+  C.ca=mc('catC',{type:'doughnut',data:{labels:['日用','餐饮','交通','娱乐','购物'],datasets:[{data:[140,196,12,33,0],backgroundColor:[a,g,y,r,c],borderWidth:2,borderColor:cb}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:tc,padding:10,font:{size:10}}}}}});
   C.ex=mc('exC',{type:'bar',data:{labels:['本周','第1周','第2周','第3周'],datasets:[{label:'跑步',data:[0,2,1,2],backgroundColor:g,borderRadius:4},{label:'游泳',data:[0,0,1,1],backgroundColor:c,borderRadius:4},{label:'瑜伽',data:[0,1,0,1],backgroundColor:p,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{color:tc,usePointStyle:true,pointStyleWidth:6,padding:12,font:{size:10}}}},scales:{x:{stacked:true,ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{stacked:true,ticks:{color:tc,stepSize:2,font:{size:10}},grid:{color:gc}}}}});
 }
 var MC={};
