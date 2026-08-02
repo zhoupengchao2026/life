@@ -270,25 +270,55 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Inter','N
 
 <script>
 // THEME
-document.getElementById('ts').addEventListener('click',function(e){var b=e.target.closest('.tb');if(!b)return;document.documentElement.setAttribute('data-theme',b.dataset.theme);document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('active')});b.classList.add('active');try{if(typeof rCharts==='function')rCharts()}catch(ex){}});
+document.getElementById('ts').addEventListener('click',function(e){
+  var b=e.target.closest('.tb');if(!b)return;
+  document.documentElement.setAttribute('data-theme',b.dataset.theme);
+  document.querySelectorAll('.tb').forEach(function(x){x.classList.remove('active')});
+  b.classList.add('active');
+  try{rCharts()}catch(ex){}
+});
 // NAV
-document.getElementById('topbar').addEventListener('click',function(e){var t=e.target.closest('.nav-tab');if(!t)return;document.querySelectorAll('.nav-tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');var pages=['dash','monthly','goals','kb'];pages.forEach(function(p){var el=document.getElementById('page-'+p);if(el)el.style.display='none'});var el=document.getElementById('page-'+t.dataset.page);if(el)el.style.display='block';if(t.dataset.page==='dash')document.querySelectorAll('#week-w1 .sec,#week-w2 .sec').forEach(function(s){s.style.display='block'});});
-// WEEK SWITCH
-function switchWeek(w){document.getElementById('week-w1').style.display=w==='w1'?'block':'none';document.getElementById('week-w2').style.display=w==='w2'?'block':'none';if(w==='w1')rCharts()}
+document.getElementById('topbar').addEventListener('click',function(e){
+  var t=e.target.closest('.nav-tab');if(!t)return;
+  document.querySelectorAll('.nav-tab').forEach(function(x){x.classList.remove('active')});
+  t.classList.add('active');
+  ['dash','monthly','goals','kb'].forEach(function(p){
+    var el=document.getElementById('page-'+p);if(el)el.style.display='none';
+  });
+  var el=document.getElementById('page-'+t.dataset.page);if(el)el.style.display='block';
+  if(t.dataset.page==='dash'){
+    document.querySelectorAll('#week-w1 .sec,#week-w2 .sec').forEach(function(s){s.style.display='block'});
+  }
+});
+// WEEK
+function switchWeek(w){
+  document.getElementById('week-w1').style.display=w==='w1'?'block':'none';
+  document.getElementById('week-w2').style.display=w==='w2'?'block':'none';
+  if(w==='w1')rCharts();
+}
 // MURMUR
-['mtabs1'].forEach(function(id){var el=document.getElementById(id);if(!el)return;el.addEventListener('click',function(e){var t=e.target.closest('.mtab');if(!t)return;el.querySelectorAll('.mtab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');var mc=document.getElementById('mcontent1');if(!mc)return;mc.querySelectorAll('.mday').forEach(function(x){x.classList.remove('active')});var d=mc.querySelector('#md-'+t.dataset.day);if(d)d.classList.add('active')})});
-// RENDER MURMUR DAYS
-
-// SEARCH
-
-// CHARTS (week 1 only)
+['mtabs1'].forEach(function(id){
+  var el=document.getElementById(id);if(!el)return;
+  el.addEventListener('click',function(e){
+    var t=e.target.closest('.mtab');if(!t)return;
+    el.querySelectorAll('.mtab').forEach(function(x){x.classList.remove('active')});
+    t.classList.add('active');
+    var mc=document.getElementById('mcontent1');if(!mc)return;
+    mc.querySelectorAll('.mday').forEach(function(x){x.classList.remove('active')});
+    var d=mc.querySelector('#md-'+t.dataset.day);if(d)d.classList.add('active');
+  });
+});
+// CHARTS
 function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
 var C={};
-function rCharts(){Object.values(C).forEach(function(c){c.destroy()});C={};var gc=cv('--border'),tc=cv('--muted'),a=cv('--accent'),p=cv('--p'),g=cv('--g'),y=cv('--y'),r=cv('--r'),c=cv('--c'),cb=cv('--card');
-var o={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc}}}};
-var sp=document.getElementById('spC1');if(sp)C.sp=new Chart(sp,{type:'bar',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'花费',data:[134,34,12,7,0,167,33],backgroundColor:a+'99',borderColor:a,borderWidth:1,borderRadius:6}]},options:o});
-var mo=document.getElementById('moC1');if(mo){var o2=JSON.parse(JSON.stringify(o));o2.scales.y={min:1,max:10,ticks:{color:tc,stepSize:2,font:{size:10}},grid:{color:gc}};C.mo=new Chart(mo,{type:'line',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'情绪',data:[5.5,6,5.5,5.5,5.5,6,6.5],borderColor:p,backgroundColor:p+'20',fill:true,tension:.4,pointRadius:5,pointBackgroundColor:p}]},options:o2})}
-var pie=document.getElementById('pieC1');if(pie){C.pie=new Chart(pie,{type:'doughnut',data:{labels:['日用','餐饮','交通','礼物','酒店'],datasets:[{data:[134,74,12,128,55],backgroundColor:[a,g,y,r,c],borderWidth:2,borderColor:cb}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:tc,padding:8,font:{size:10}}}}}}}})
+function rCharts(){
+  Object.values(C).forEach(function(c){c.destroy()});C={};
+  var gc=cv('--border'),tc=cv('--muted'),a=cv('--accent'),p=cv('--p'),g=cv('--g'),y=cv('--y'),r=cv('--r'),c=cv('--c'),cb=cv('--card');
+  var o={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{ticks:{color:tc,font:{size:10}},grid:{color:gc}}}};
+  var sp=document.getElementById('spC1');if(sp)C.sp=new Chart(sp,{type:'bar',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'花费',data:[134,34,12,7,0,167,33],backgroundColor:a+'99',borderColor:a,borderWidth:1,borderRadius:6}]},options:o});
+  var mo=document.getElementById('moC1');if(mo){var o2={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:tc,font:{size:10}},grid:{display:false}},y:{min:1,max:10,ticks:{color:tc,stepSize:2,font:{size:10}},grid:{color:gc}}}};C.mo=new Chart(mo,{type:'line',data:{labels:['7/25','7/26','7/27','7/28','7/29','7/30','7/31'],datasets:[{label:'情绪',data:[5.5,6,5.5,5.5,5.5,6,6.5],borderColor:p,backgroundColor:p+'20',fill:true,tension:0.4,pointRadius:5,pointBackgroundColor:p}]},options:o2})}
+  var pie=document.getElementById('pieC1');if(pie){var pd={labels:['日用','餐饮','交通','礼物','酒店'],datasets:[{data:[134,74,12,128,55],backgroundColor:[a,g,y,r,c],borderWidth:2,borderColor:cb}]};var po={responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:tc,padding:8,font:{size:10}}}}};C.pie=new Chart(pie,{type:'doughnut',data:pd,options:po})}
+}
 rCharts();
 </script>
 </body>
