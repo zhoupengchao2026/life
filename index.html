@@ -219,124 +219,111 @@ body{background:var(--bg);color:var(--text);font-family:-apple-system,'Inter','N
 
 <!-- ====== WEEK 2 (8/1-8/7) placeholder ====== -->
 <div id="week-w2">
-<div class="sec">
+<div class="sec" id="page-dash">
+
 <div class="kpi-r">
-  <div class="kpi"><div class="l">💰 本周花费</div><div class="v" style="color:var(--y)">¥5,471</div><div class="d">含房租+房贷 · 日常¥0</div></div>
-  <div class="kpi"><div class="l">🏃 运动</div><div class="v" style="color:var(--g)">1<span style="font-size:12px;color:var(--muted)">/7天</span></div><div class="d">8/2快走30分钟</div></div>
+  <div class="kpi"><div class="l">💰 日常花费</div><div class="v" style="color:var(--y)">¥0</div><div class="d">预算 ¥1,200/周 · 不含房租房贷</div><div class="bar"><div style="width:0%;background:var(--y)"></div></div></div>
+  <div class="kpi"><div class="l">🏃 运动</div><div class="v" style="color:var(--g)">1<span style="font-size:12px;color:var(--muted)">/7天</span></div><div class="d">8/2快走30分钟 ✅</div></div>
   <div class="kpi"><div class="l">😊 情绪</div><div class="v" style="color:var(--p)">6-7</div><div class="d">整体不错</div></div>
-  <div class="kpi"><div class="l">📚 在读</div><div class="v" style="color:var(--c)">3<span style="font-size:12px;color:var(--muted)">本</span></div><div class="d">好好学习·半寸农庄·柯南</div></div>
-  <div class="kpi"><div class="l">📚 新增</div><div class="v" style="color:var(--c)">2<span style="font-size:12px;color:var(--muted)">本</span></div><div class="d">真幌站前·成长的烦恼</div></div></div>
+  <div class="kpi"><div class="l">📚 在读</div><div class="v" style="color:var(--c)">5<span style="font-size:12px;color:var(--muted)">本</span></div><div class="d">+真幌站前·成长的烦恼</div></div>
 </div>
-<div class="card"><h2>📅 本周记录</h2>
-<div class="tl-r"><div class="tl-d">8/1 六</div><div class="tl-m">—</div><div class="tl-c"><p>酒店休息日。¥0。</p><div class="tl-me">💸 ¥0</div></div></div>
-<div class="tl-r"><div class="tl-d">8/2 日</div><div class="tl-m">🙂</div><div class="tl-c"><p>房租¥3200+房贷¥2271。跑步机快走30分钟🏃！3节英语课。晚上被网站bug气到😤</p><div class="tl-me">💸 ¥5,471 <span class="tag s">运动开张</span><span class="tag b">英语课</span></div></div></div>
-<div class="tl-r"><div class="tl-d">8/3 一</div><div class="tl-m">😊</div><div class="tl-c"><p>卡布奇诺一晚上没睡☕️ 上午修灯睡3小时。下午跟老爸弟弟视频，复习笔记。晚上英语课进不去就洗头看老友记📺</p><div class="tl-me">💸 ¥0 <span class="tag e">熬夜看书</span><span class="tag b">复习</span></div></div></div>
-</div>
+
 <div class="cg">
-  <div class="card"><h3>📈 花费趋势</h3><div class="cw"><canvas id="spC2"></canvas></div></div>
+  <div class="card"><h3>📈 日常花费</h3><div class="cw"><canvas id="spC2"></canvas></div></div>
   <div class="card"><h3>🎭 情绪波动</h3><div class="cw"><canvas id="moC2"></canvas></div></div>
+  <div class="card"><h3>🔥 活动</h3>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;padding:8px 0">
+      <div class="g9c" style="opacity:.4"><div style="font-size:10px;color:var(--muted)">8/1</div><div style="font-size:20px">—</div></div>
+      <div class="g9c"><div style="font-size:10px;color:var(--muted)">8/2</div><div style="font-size:20px">🏃</div><div style="font-size:10px">快走</div></div>
+      <div class="g9c" style="opacity:.4"><div style="font-size:10px;color:var(--muted)">8/3</div><div style="font-size:20px">—</div></div>
+    </div>
+    <div style="font-size:11px;color:var(--muted)">🎯 目标3次/周 · 本周1次 ✅</div>
+  </div>
 </div>
 
-<div class="card"><h2>🌤️ 每日全景</h2>
-<div class="mtabs" id="mtabs2">
-  <button class="mtab active" data-day="w2d0">8/1</button>
-  <button class="mtab" data-day="w2d1">8/2</button>
-  <button class="mtab" data-day="w2d2">8/3</button>
+<div class="card">
+  <h2>📅 本周记录</h2>
+  <div class="tl-r"><div class="tl-d">8/1 六</div><div class="tl-m">—</div><div class="tl-c"><p>酒店休息日。¥0。</p><div class="tl-me">💸 ¥0</div></div></div>
+  <div class="tl-r"><div class="tl-d">8/2 日</div><div class="tl-m">🙂</div><div class="tl-c"><p>跑步机快走30分钟!运动开张！3节英语课。房租3200+房贷2271。晚上被网站bug气到</p><div class="tl-me">💸 日常0+房租+房贷 <span class="tag s">运动</span><span class="tag b">英语</span></div></div></div>
+  <div class="tl-r"><div class="tl-d">8/3 一</div><div class="tl-m">😊</div><div class="tl-c"><p>卡布奇诺一晚上没睡 上午修灯睡3小时。下午跟老爸弟弟视频，复习笔记。英语课没上成，洗头看老友记</p><div class="tl-me">💸 0 <span class="tag e">熬夜</span><span class="tag b">复习</span></div></div></div>
 </div>
-<div id="mcontent2">
-<div class="mday active" id="md-w2d0"><p style="font-size:13px;line-height:1.7">酒店休息日。¥0。</p>
-<div class="g9">
-<div class="g9c"><div class="i">💰</div><div class="lb">花费</div><div class="vl" style="color:var(--g)">¥0</div></div>
-<div class="g9c"><div class="i">🏃</div><div class="lb">运动</div><div class="vl" style="color:var(--r)">—</div></div>
-<div class="g9c"><div class="i">😊</div><div class="lb">心情</div><div class="vl" style="color:var(--y)">—</div></div>
-<div class="g9c"><div class="i">😴</div><div class="lb">睡眠</div><div class="vl" style="font-size:11px">—</div></div>
-<div class="g9c"><div class="i">📝</div><div class="lb">学到</div><div class="vl" style="font-size:11px">—</div></div>
-<div class="g9c"><div class="i">⚡</div><div class="lb">重点</div><div class="vl" style="font-size:11px">休息</div></div>
-<div class="g9c"><div class="i">🔄</div><div class="lb">反思</div><div class="vl" style="font-size:11px">—</div></div>
-<div class="g9c"><div class="i">😄</div><div class="lb">开心</div><div class="vl" style="font-size:11px">—</div></div>
-<div class="g9c"><div class="i">🎯</div><div class="lb">明日</div><div class="vl" style="font-size:11px">—</div></div>
-</div><div class="en-box"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">🇬🇧 今日英语</div>—</div></div>
 
-<div class="mday" id="md-w2d1"><p style="font-size:13px;line-height:1.7">8/2 周日。房租¥3200+房贷¥2271。跑步机快走30分钟🏃！3节英语课。晚上被网站bug气到😤 学了很多酒店WiFi相关英语表达。</p>
-<div class="g9">
-<div class="g9c"><div class="i">💰</div><div class="lb">花费</div><div class="vl" style="color:var(--y)">¥5,471</div></div>
-<div class="g9c"><div class="i">🏃</div><div class="lb">运动</div><div class="vl" style="color:var(--g)">快走30min</div></div>
-<div class="g9c"><div class="i">😊</div><div class="lb">心情</div><div class="vl" style="color:var(--y)">6.0</div></div>
-<div class="g9c"><div class="i">😴</div><div class="lb">睡眠</div><div class="vl" style="font-size:11px">—</div></div>
-<div class="g9c"><div class="i">📝</div><div class="lb">学到</div><div class="vl" style="font-size:11px">in the air</div></div>
-<div class="g9c"><div class="i">⚡</div><div class="lb">重点</div><div class="vl" style="font-size:11px">3节英语课</div></div>
-<div class="g9c"><div class="i">🔄</div><div class="lb">反思</div><div class="vl" style="font-size:11px">别被网站气</div></div>
-<div class="g9c"><div class="i">😄</div><div class="lb">开心</div><div class="vl" style="font-size:11px">运动开张</div></div>
-<div class="g9c"><div class="i">🎯</div><div class="lb">明日</div><div class="vl" style="font-size:11px">复习笔记</div></div>
-</div><div class="en-box"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">🇬🇧 今日英语</div>in the air / in midair / up in the air / airborne · county-level city · hotel Wi-Fi表达 · Sorry for being late · switch to mobile data</div></div>
+<div class="card">
+  <h2>🌤️ 每日全景</h2>
+  <div class="mtabs" id="mtabs2">
+    <button class="mtab active" data-day="w2d0">8/1 六</button>
+    <button class="mtab" data-day="w2d1">8/2 日</button>
+    <button class="mtab" data-day="w2d2">8/3 一</button>
+  </div>
+  <div id="mcontent2">
 
-<div class="mday" id="md-w2d2"><p style="font-size:13px;line-height:1.7">8/3 周一。卡布奇诺一晚上没睡☕️ 上午修灯睡3小时。下午跟老爸弟弟视频，复习笔记。晚上英语课进不去就洗头看老友记📺 花¥0，没运动（太晚怕心脏不好）。</p>
-<div class="g9">
-<div class="g9c"><div class="i">💰</div><div class="lb">花费</div><div class="vl" style="color:var(--g)">¥0</div></div>
-<div class="g9c"><div class="i">🏃</div><div class="lb">运动</div><div class="vl" style="color:var(--r)">—</div></div>
-<div class="g9c"><div class="i">😊</div><div class="lb">心情</div><div class="vl" style="color:var(--y)">7.0</div></div>
-<div class="g9c"><div class="i">😴</div><div class="lb">睡眠</div><div class="vl" style="font-size:11px">通宵没睡</div></div>
-<div class="g9c"><div class="i">📝</div><div class="lb">学到</div><div class="vl" style="font-size:11px">master switch</div></div>
-<div class="g9c"><div class="i">⚡</div><div class="lb">重点</div><div class="vl" style="font-size:11px">熬夜看书</div></div>
-<div class="g9c"><div class="i">🔄</div><div class="lb">反思</div><div class="vl" style="font-size:11px">晚上别喝咖啡</div></div>
-<div class="g9c"><div class="i">😄</div><div class="lb">开心</div><div class="vl" style="font-size:11px">跟家人视频</div></div>
-<div class="g9c"><div class="i">🎯</div><div class="lb">明日</div><div class="vl" style="font-size:11px">英语复盘</div></div>
-</div><div class="en-box"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">🇬🇧 今日英语</div>master switch · check out/check back in · repack·hassle · not only on land but also in the sky · Sorry for being late · communicator</div></div>
-</div></div>
+<div class="mday active" id="md-w2d0">
+  <p style="font-size:13px;line-height:1.7">8/1 周六。酒店休息日，0。</p>
+  <div class="g9">
+    <div class="g9c"><div class="i">💰</div><div class="lb">花费</div><div class="vl" style="color:var(--g)">0</div></div>
+    <div class="g9c"><div class="i">🏃</div><div class="lb">运动</div><div class="vl" style="color:var(--r)">—</div></div>
+    <div class="g9c"><div class="i">😊</div><div class="lb">心情</div><div class="vl" style="color:var(--y)">—</div></div>
+    <div class="g9c"><div class="i">😴</div><div class="lb">睡眠</div><div class="vl" style="font-size:11px">—</div></div>
+    <div class="g9c"><div class="i">📝</div><div class="lb">学到</div><div class="vl" style="font-size:11px">—</div></div>
+    <div class="g9c"><div class="i">⚡</div><div class="lb">重点</div><div class="vl" style="font-size:11px">休息</div></div>
+    <div class="g9c"><div class="i">🔄</div><div class="lb">反思</div><div class="vl" style="font-size:11px">—</div></div>
+    <div class="g9c"><div class="i">😄</div><div class="lb">开心</div><div class="vl" style="font-size:11px">—</div></div>
+    <div class="g9c"><div class="i">🎯</div><div class="lb">明日</div><div class="vl" style="font-size:11px">英语课</div></div>
+  </div>
+</div>
 
+<div class="mday" id="md-w2d1">
+  <p style="font-size:13px;line-height:1.7">8/2 周日。跑步机快走30分钟!运动开张！3节英语课。房租+房贷。晚上被网站bug气到。学了in the air/up in the air/county-level city/hotel WiFi表达。</p>
+  <div class="g9">
+    <div class="g9c"><div class="i">💰</div><div class="lb">花费</div><div class="vl" style="color:var(--y)">0</div></div>
+    <div class="g9c"><div class="i">🏃</div><div class="lb">运动</div><div class="vl" style="color:var(--g)">快走30min</div></div>
+    <div class="g9c"><div class="i">😊</div><div class="lb">心情</div><div class="vl" style="color:var(--y)">6.0</div></div>
+    <div class="g9c"><div class="i">😴</div><div class="lb">睡眠</div><div class="vl" style="font-size:11px">—</div></div>
+    <div class="g9c"><div class="i">📝</div><div class="lb">学到</div><div class="vl" style="font-size:11px">in the air</div></div>
+    <div class="g9c"><div class="i">⚡</div><div class="lb">重点</div><div class="vl" style="font-size:11px">3节英语课</div></div>
+    <div class="g9c"><div class="i">🔄</div><div class="lb">反思</div><div class="vl" style="font-size:11px">网站bug太多</div></div>
+    <div class="g9c"><div class="i">😄</div><div class="lb">开心</div><div class="vl" style="font-size:11px">运动开张</div></div>
+    <div class="g9c"><div class="i">🎯</div><div class="lb">明日</div><div class="vl" style="font-size:11px">复习笔记</div></div>
+  </div>
+  <div class="en-box"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">🇬🇧 今日英语</div>
+<b>「在空中」</b> in the air / in midair / up in the air / airborne<br>
+<b>「未来高楼」</b> buildings will keep getting taller and taller<br>
+<b>「县级市」</b> county-level city<br>
+<b>「WiFi太差」</b> Sorry I'm late - the hotel Wi-Fi was so bad I had to switch to my mobile data
+  </div>
+</div>
 
-<div class="card"><h2>🇬🇧 本周英语</h2>
-<div style="font-size:12px;line-height:1.9">
-
-<b>📅 8/2 — 酒店WiFi + 日常表达</b><br>
-<b>「在空中」的表达：</b><br>
-• in the air — 最通用（The plane is in the air / There's something in the air 有气氛）<br>
-• in midair — 强调悬空状态（The ball stopped in midair）<br>
-• up in the air / airborne — 飞行状态（We're already up in the air / The plane is airborne）<br>
-• up in the air（引申义）— 悬而未决（The plan is still up in the air）<br>
-<b>「未来会有更多高楼」：</b><br>
-• In the future, there will be more and more taller buildings.<br>
-• In the future, we'll see more and more tall buildings.<br>
-• In the future, buildings will keep getting taller and taller.<br>
-• Unlike there, in the future we'll have more and more taller buildings here.<br>
-<b>「县级市」：</b><br>
-• county-level city — 标准译法（Kunshan is a county-level city in Jiangsu Province）<br>
-• a city administered at the county level — 解释性说法<br>
-<b>「酒店WiFi太差无法上课」：</b><br>
-• The hotel Wi-Fi is terrible – I keep getting disconnected from my class.<br>
-• The internet connection here is very poor. I've been unable to join my online class.<br>
-• The Wi-Fi is so bad that I can't even stay connected to my course session.<br>
-• Sorry I'm late – the hotel Wi-Fi was so bad I had to switch to my mobile data to join the class.<br><br>
-
-<b>📅 8/3 — 酒店沟通 + 语法纠错</b><br>
-<b>「请派人检查开关」：</b><br>
-• Could you please send someone to check the switches and lights in my room? When I press the master switch, it doesn't turn off all the lights.<br>
-• Also, I've extended my stay until August 11 – could I check out and then check back in again?<br>
-• Sorry to bother you, but could you send someone to check my room's master switch?<br>
-<b>「不想重新打包行李」：</b><br>
-• I really don't want to repack all my stuff – it's such a hassle.<br>
-• I'd rather not check out and back in – I don't want to repack everything. It's such a hassle.<br>
-• I'd prefer not to check out and back in because I don't want to repack all my luggage – it's too inconvenient.<br>
-<b>语法纠错：</b><br>
-<span style="color:#e74c3c">✗ "not only by the ground"</span> → <span style="color:#27ae60">✓ "not only on land but also in the sky"</span><br>
+<div class="mday" id="md-w2d2">
+  <p style="font-size:13px;line-height:1.7">8/3 周一。卡布奇诺一晚上没睡!上午修灯睡3小时。下午跟老爸弟弟视频，复习笔记。英语课没上成，洗头看老友记。0，没运动（太晚怕心脏不好）。心情不错。</p>
+  <div class="g9">
+    <div class="g9c"><div class="i">💰</div><div class="lb">花费</div><div class="vl" style="color:var(--g)">0</div></div>
+    <div class="g9c"><div class="i">🏃</div><div class="lb">运动</div><div class="vl" style="color:var(--r)">—</div></div>
+    <div class="g9c"><div class="i">😊</div><div class="lb">心情</div><div class="vl" style="color:var(--y)">7.0</div></div>
+    <div class="g9c"><div class="i">😴</div><div class="lb">睡眠</div><div class="vl" style="font-size:11px">通宵没睡</div></div>
+    <div class="g9c"><div class="i">📝</div><div class="lb">学到</div><div class="vl" style="font-size:11px">master switch</div></div>
+    <div class="g9c"><div class="i">⚡</div><div class="lb">重点</div><div class="vl" style="font-size:11px">熬夜复习</div></div>
+    <div class="g9c"><div class="i">🔄</div><div class="lb">反思</div><div class="vl" style="font-size:11px">晚上别喝咖啡</div></div>
+    <div class="g9c"><div class="i">😄</div><div class="lb">开心</div><div class="vl" style="font-size:11px">跟家人视频</div></div>
+    <div class="g9c"><div class="i">🎯</div><div class="lb">明日</div><div class="vl" style="font-size:11px">英语复盘</div></div>
+  </div>
+  <div class="en-box"><div style="font-size:11px;color:var(--muted);margin-bottom:4px">🇬🇧 今日英语</div>
+<b>「检查开关」</b> Could you send someone to check the master switch?<br>
+<b>「不想打包」</b> I'd rather not repack everything - its such a hassle.<br>
 <span style="color:#e74c3c">✗ "Sorry for the late."</span> → <span style="color:#27ae60">✓ "Sorry for being late."</span><br>
-<span style="color:#e74c3c">✗ "Some people might good at communicating."</span> → <span style="color:#27ae60">✓ "Some people might be good at communicating."</span><br>
-<span style="color:#27ae60">✓ communicator</span> = someone who is able to talk about their ideas and emotions in a way that others understand<br>
-<span style="color:#27ae60">✓ "There will be more high buildings in the future."</span><br><br>
+<span style="color:#e74c3c">✗ "might good at"</span> → <span style="color:#27ae60">✓ "might be good at"</span><br>
 <span style="color:#e74c3c">✗ "not only by the ground"</span> → <span style="color:#27ae60">✓ "not only on land but also in the sky"</span><br>
-<span style="color:#27ae60">✓ "There will be more high buildings in the future."</span><br>
-<span style="color:#e74c3c">✗ "Sorry for the late."</span> → <span style="color:#27ae60">✓ "Sorry for being late."</span><br>
-<span style="color:#e74c3c">✗ "Some people might good at communicating."</span> → <span style="color:#27ae60">✓ "Some people might be good at communicating."</span><br>
-<span style="color:#27ae60">✓ communicator</span> = someone who is able to talk about their ideas and emotions in a way that others understand<br>
-"vegetables. complexity" → 蔬菜/复杂性（上下文不完整，可能需要补充）<br><br>
-<b>8/3 酒店沟通 + 续住：</b><br>
-"Could you send someone to check the master switch? It doesn't turn off all the lights."<br>
-"I've extended my stay until August 11. Do I need to check out and check back in?"<br>
-"I'd rather not repack everything – it's such a hassle."<br>
-"Sorry to bother you, but..." = 柔和的开场白
-</div></div>
+<span style="color:#27ae60">✓ communicator</span>
+  </div>
+</div>
+
 </div></div>
 
+<div class="card" style="margin-top:10px">
+  <h2>💡 感悟</h2>
+  <span class="tag s">🏃 运动开张</span> <span class="tag b">📚 两本新书</span> <span class="tag e">☕ 咖啡别晚喝</span> <span class="tag m">📝 复习有用</span>
+</div>
+
+</div></div>
 <!-- ====== MONTHLY (minimal, no fake data) ====== -->
 <div class="sec" id="page-monthly" style="display:none">
 <div class="card">
